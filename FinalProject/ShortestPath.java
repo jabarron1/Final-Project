@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -65,6 +66,48 @@ public class ShortestPath {
 	
 	//private createGraph which is the matrix
 	private void createGraph() throws FileNotFoundException{
+		for(int i = 0; i < 10000; i++) {
+			for(int j = 0; j < 10000; j++) {
+				if(i != j) { //two different locations
+					adjMatrix[i][j] = Math.pow(10000,10000); //need to recheck this
+				}
+				else { //0 as bus doesnt have to go anywhere
+					adjMatrix[i][j] = 0;
+				}
+			}
+		}
+		
+		//initialise a startDestination, finalDestination, lastTripID, currentTripID, shortestTime, cost, direct, line
+		int startDestination = 0;
+		int finalDestination = 0;
+		int lastTripID = 0;
+		int currentTripID = 0;
+		double shortestTime;
+		double cost = 1; //1 from stop times, 2 if from transfer
+		int transferNeeded; //
+		String currentLineStopTimes;
+		
+		//stop times file
+		File stopTimes = new File(stop_timesTxt);
+		Scanner stopTimesFile = new Scanner(stopTimes);
+		Scanner lineStopTimes = null;
+		stopTimesFile.nextLine();
+		
+		while(stopTimesFile.hasNextLine()) {
+			currentLineStopTimes = stopTimesFile.nextLine();
+			lineStopTimes = new Scanner(currentLineStopTimes);
+			lineStopTimes.useDelimiter(",");
+			
+			lastTripID = currentTripID;
+			for(int i = 1; i < 3; i++) {
+				lineStopTimes.next();
+			}
+			startDestination = finalDestination;
+			finalDestination = lineStopTimes.nextInt();
+			
+			
+		}
+		
 		
 	}
 	
