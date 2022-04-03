@@ -4,7 +4,6 @@
 //will need to remove all invalid times, e.g., there are times in the file that start at 27/28 hours, so are
 //clearly invalid. Maximum time allowed is 23:59:59. 
 
-
 public class SearchForAllTrips {
 
 }

@@ -5,7 +5,6 @@
 //sb, eb from start of the names to the end of the names of the stops when reading the file into a TST
 //(eg “WB HASTINGS ST FS HOLDOM AVE” becomes “HASTINGS ST FS HOLDOM AVE WB”)
 
-
 public class SearchForBusStopTST {
 
 }
