@@ -35,13 +35,17 @@ public class ShortestPath {
 	}
 	
 	public static void showShortestPath() throws FileNotFoundException{
-		ShortestPath map = new ShortestPath("stop_timesTxt", "transfersTxt");
+		ShortestPath map = new ShortestPath("stop_timesTxt", "transfersTxt"); //define this
 		
 		try
 		
 		{
 			map.createGraph(); //need to define this
 		}
+		//catch (FileNotFoundException e) 
+		//{
+			//e.printStackTrace();
+		//}
 		
 		//take user input
 		Scanner userInput = new Scanner (System.in);
@@ -52,9 +56,25 @@ public class ShortestPath {
 		int finishPlace = userInput.nextInt();
 		
 		//can then print shortest distance between the two user inputted locations, first need to create this.
+		System.out.println("The shortest distance from " + startPlace + " to " + finishPlace + " is " + map.shortestPath(startPlace, finishPlace));
 		
-	
+		userInput.close();
 			
+		
+	}
+	
+	//private createGraph which is the matrix
+	private void createGraph() throws FileNotFoundException{
+		
+	}
+	
+	//define ShortestPath
+	public ShortestPath(String stop_timesTxt, String transfersTxt) throws FileNotFoundException{
+		
+	}
+	
+	//need to find the shortest path, shortestPath.
+	public String shortestPath() {
 		
 	}
 	
