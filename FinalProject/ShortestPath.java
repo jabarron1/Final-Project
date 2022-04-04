@@ -164,7 +164,7 @@ public class ShortestPath {
 		double firstNode = startDestination;
 		double secondNode = finalDestination;
 		int distancesLength = distanceTo.length;
-		String path = "";
+		String route = "";
 		
 		for(int i = 0; i<distancesLength; i++) {
 			if(i != startDestination) {
@@ -186,14 +186,14 @@ public class ShortestPath {
 			
 			for(int i = 0; i < adjMatrix[currentLocation].length; i++) {
 				if(current[i] == 0) {
-					relaxingEdge(currentLocation, i, distanceTo, edgeTo); //need to define this method. ***********
+					relaxingEdge(currentLocation, i, distanceTo, edgeTo); //define below
 				}
 			}
 			current[currentLocation] = 1;
 		}
 		
 		if(distanceTo[finalDestination] == Double.POSITIVE_INFINITY) {
-			return "There is no route between these stops."
+			return "There is no route between these stops.";
 		}
 		
 		while(secondNode != firstNode) {
@@ -206,6 +206,12 @@ public class ShortestPath {
 	}
 	
 	//relaxingEdge
+	private void relaxingEdge(int startDestination, int finalDestination, double[] distanceTo, int[] edgeTo) {
+		if(distanceTo[finalDestination] > distanceTo[startDestination] + adjMatrix[startDestination][finalDestination]) {
+			distanceTo[finalDestination] = distanceTo[startDestination] + adjMatrix[startDestination][finalDestination];
+			edgeTo[finalDestination] = startDestination;
+		}
+	}
 
 
 	
