@@ -43,10 +43,10 @@ public class ShortestPath {
 		{
 			map.createGraph(); //need to define this
 		}
-		//catch (FileNotFoundException e) 
-		//{
-			//e.printStackTrace();
-		//}
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
 		
 		//take user input
 		Scanner userInput = new Scanner (System.in);
