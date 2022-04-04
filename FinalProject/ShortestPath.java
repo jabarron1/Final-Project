@@ -82,32 +82,63 @@ public class ShortestPath {
 		int finalDestination = 0;
 		int lastTripID = 0;
 		int currentTripID = 0;
-		double shortestTime;
+		double minTransferTime; //for transfer type 2
 		double cost = 1; //1 from stop times, 2 if from transfer
 		int transferNeeded; //
 		String currentLineStopTimes;
 		
 		//stop times file
-		File stopTimes = new File(stop_timesTxt);
-		Scanner stopTimesFile = new Scanner(stopTimes);
-		Scanner lineStopTimes = null;
-		stopTimesFile.nextLine();
+		File stopTimes = new File(stop_timesTxt); //1
+		Scanner stopTimesAndTransferFile = new Scanner(stopTimes); //2
+		Scanner lineStopTimes = null; //3
+		stopTimesAndTransferFile.nextLine(); //2
 		
-		while(stopTimesFile.hasNextLine()) {
-			currentLineStopTimes = stopTimesFile.nextLine();
-			lineStopTimes = new Scanner(currentLineStopTimes);
-			lineStopTimes.useDelimiter(",");
+		while(stopTimesAndTransferFile.hasNextLine()) { //2
+			currentLineStopTimes = stopTimesAndTransferFile.nextLine(); //str
+			lineStopTimes = new Scanner(currentLineStopTimes); //3
+			lineStopTimes.useDelimiter(","); //3
 			
 			lastTripID = currentTripID;
 			for(int i = 1; i < 3; i++) {
-				lineStopTimes.next();
+				lineStopTimes.next(); //3
 			}
 			startDestination = finalDestination;
-			finalDestination = lineStopTimes.nextInt();
+			finalDestination = lineStopTimes.nextInt(); //3
 			
+			if(lastTripID == currentTripID) {
+				adjMatrix[startDestination][finalDestination] = cost; //cost = 1 when stop times file
+			}
+			
+			lineStopTimes.close(); //3
 			
 		}
+		stopTimesAndTransferFile.close(); //2
 		
+		//now onto transfers file, therefore indirect service (ie transfer needed) with a cost of 2
+		
+		File transfers = new File(transfersTxt);
+		stopTimesAndTransferFile = new Scanner(transfers);
+		stopTimesAndTransferFile.nextLine();
+		
+		while(stopTimesAndTransferFile.hasNextLine()) {
+			currentLineStopTimes = stopTimesAndTransferFile.nextLine(); 
+			lineStopTimes = new Scanner(currentLineStopTimes); 
+			lineStopTimes.useDelimiter(",");
+			
+			startDestination = lineStopTimes.nextInt();
+			finalDestination = lineStopTimes.nextInt();
+			transferNeeded = lineStopTimes.nextInt();
+			
+			if(transferNeeded == 0) { //with immediate transfer possible (type 0) cost is 2
+				adjMatrix[startDestination][finalDestination] = 2;
+			}
+			else if(transferNeeded == 2) { //for type 2, cost is the minimum transfer time divided by 100.
+				minTransferTime = lineStopTimes.nextDouble();
+				adjMatrix[startDestination][finalDestination] = (minTransferTime / 100);
+			}
+			lineStopTimes.close();
+		}
+		stopTimesAndTransferFile.close();
 		
 	}
 	
