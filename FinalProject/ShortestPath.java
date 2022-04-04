@@ -144,12 +144,28 @@ public class ShortestPath {
 	
 	//define ShortestPath
 	public ShortestPath(String stop_timesTxt, String transfersTxt) throws FileNotFoundException{
-		
+		this.stop_timesTxt = stop_timesTxt;
+		this.transfersTxt = transfersTxt;
+		createGraph();
 	}
 	
-	//need to find the shortest path, shortestPath.
-	public String shortestPath() {
+	//need to find the shortest path, shortestPath. use startDestination and finalDestination
+	public String shortestPath(int startDestination, int finalDestination) {
+		//nodes, distanceTo, edgeTo, current, noStopping, location, shortDistance, distancesLength
+		int edgeTo[]= new int[10000];
+		int current [] = new int[10000];
+		double distanceTo[] = new double[10000];
+		current[startDestination]=1;
+		distanceTo[startDestination] = 0;
+		int currentLocation = startDestination;
+		int noStopping = 0;
+		double shortDistance = Math.pow(10000, 10000);
 		
+		double firstNode = startDestination;
+		double secondNode = finalDestination;
+		int distancesLength = distanceTo.length;
+		String path = "";
+				
 	}
 	
 	
