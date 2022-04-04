@@ -153,7 +153,7 @@ public class ShortestPath {
 	public String shortestPath(int startDestination, int finalDestination) {
 		//nodes, distanceTo, edgeTo, current, noStopping, location, shortDistance, distancesLength
 		int edgeTo[]= new int[10000];
-		int current [] = new int[10000];
+		int current[] = new int[10000];
 		double distanceTo[] = new double[10000];
 		current[startDestination]=1;
 		distanceTo[startDestination] = 0;
@@ -165,10 +165,48 @@ public class ShortestPath {
 		double secondNode = finalDestination;
 		int distancesLength = distanceTo.length;
 		String path = "";
+		
+		for(int i = 0; i<distancesLength; i++) {
+			if(i != startDestination) {
+				distanceTo[i] = Double.POSITIVE_INFINITY; //constant holding infinity
+			}
+		}
+		if(finalDestination == startDestination) {
+			return "" + adjMatrix[startDestination][finalDestination]; //check this out
+		}
+		
+		while(noStopping < distancesLength) {
+			for(int i = 0; i<distancesLength; i++) {
+				if(current[i] != 1 && shortDistance > distanceTo[i]) {
+					currentLocation = i;
+					shortDistance = distanceTo[i];
+				}
+			}
+			noStopping++;
+			
+			for(int i = 0; i < adjMatrix[currentLocation].length; i++) {
+				if(current[i] == 0) {
+					relaxingEdge(currentLocation, i, distanceTo, edgeTo); //need to define this method. ***********
+				}
+			}
+			current[currentLocation] = 1;
+		}
+		
+		if(distanceTo[finalDestination] == Double.POSITIVE_INFINITY) {
+			return "There is no route between these stops."
+		}
+		
+		while(secondNode != firstNode) {
+			route = edgeTo[(int) secondNode] + route;
+			secondNode = edgeTo[(int) secondNode];
+		}
+		route = route + "," +finalDestination;
+		return distanceTo[finalDestination] + " between stops " + route;
 				
 	}
 	
-	
+	//relaxingEdge
+
 
 	
 }
