@@ -58,6 +58,7 @@ public class SearchForBusStopTST {
 			scanner.useDelimiter("[,\n]");
 			scanner.nextLine();
 			
+			
 			while(scanner.hasNext()) {
 				stopID = scanner.next();
 				stopCode = scanner.next();
