@@ -1,11 +1,15 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 //Searching for a bus stop by full name or by the first few characters in the name, using a
 //ternary search tree (TST), returning the full stop information for each stop matching the
@@ -152,3 +156,46 @@ public class SearchForBusStopTST {
 
 }
 //now onto TST - Searching for a bus stop by full name or by the first few characters in the name
+
+public class TST<Value>{ //mmust be defined
+	private tstNode<Value> root;
+	private int N;
+	
+	public static void tstStops() {
+		TST<String> search = new TST<String>();
+		String line = "";
+		File stopsFile = new File("stops.txt");
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(stopsFile));
+			while((line = br.readLine()) != null) {
+				String[] stops = line.split(",");
+				String stopName = stops[2];
+				String stopInfo = "Stop id: " + stops[0] + "," + " Stop Code: " + stops[1] + "," 
+				            + " Stop Desc: " + stops[3] + "," + " Stop Lat: " + stops[4] + "," + 
+						    " Stop Lon: " + stops[5] + "," + " Zone ID " + stops[6];
+				search.put(stopName, stopInfo); //need private below ************
+			}
+			br.close();
+		} //catch below
+		catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		//now need to allow user input for searching for bus stop tst. joption pane
+		
+		String userInput = JOptionPane.showInputDialog("Please enter the name of the bus stop that you are searching for");
+		String input = userInput.toUpperCase();
+		
+		if(search.contains(input)) { //need to define
+			JOptionPane.showMessageDialog(null, "This is the stop name information for your search: " + "\n" 
+		                        + search.get(input)); //define 
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "The bus stop you are searching for does not exist, please enter a valid bus stop name.");
+		}
+	}
+	
+}
