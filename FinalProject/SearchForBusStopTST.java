@@ -243,4 +243,6 @@ public class TST<Value>{ //mmust be defined
 		}
 }
 	
+	//go through above, see what needs to be defined ect.
+	
 }
