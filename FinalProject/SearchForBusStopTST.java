@@ -70,6 +70,15 @@ public class SearchForBusStopTST {
 				stopUrl = scanner.next();
 				locationType = scanner.next();
 				parentStation = scanner.next();
+				
+				String removedWords[] = stopName.split(" ");
+				String allOtherWords = stopName.substring(stopName.indexOf(" "), stopName.length()).trim();
+				String allOtherWords2 = stopName.substring(11, stopName.length()).trim();
+				//need stopID and stopCode out(first and second words), then keyword is in stopName (third word).
+				String ignoreStopID =removedWords[0];
+				String ignoreStopCode = removedWords[1];
+				
+				
 			}
 		}
 		
