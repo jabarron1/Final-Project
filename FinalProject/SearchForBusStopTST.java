@@ -1,5 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -78,13 +79,76 @@ public class SearchForBusStopTST {
 				String ignoreStopID =removedWords[0];
 				String ignoreStopCode = removedWords[1];
 				
+				if((stopName.contains(removed2) || stopName.contains(removed3) || stopName.contains(removed4) ||
+						stopName.contains(removed5)) && !stopName.contains(removed1)) {
+					stopName = (allOtherWords + " " + ignoreStopID);
+					
+					//PRINTWRITER = c
+					c.print(stopID + "," + stopCode + "," + stopName + "," + stopDesc + "," + stopLat + "," + 
+					           stopLon + "," + zoneID + "," + stopUrl + "," + locationType + "," + parentStation );
+				}
+				else if(stopName.contains(removed1)&& !stopName.contains(removed2) && !stopName.contains(removed3) &&
+						!stopName.contains(removed4) && !stopName.contains(removed5)) {
+					stopName = (allOtherWords + " " + ignoreStopID);
+					
+					c.print(stopID + "," + stopCode + "," + stopName + "," + stopDesc + "," + stopLat + "," + 
+					           stopLon + "," + zoneID + "," + stopUrl + "," + locationType + "," + parentStation );
+				}
+				else if(stopName.contains(removed1) && !stopName.contains(removed2) && !stopName.contains(removed3) &&
+						!stopName.contains(removed4) && !stopName.contains(removed5)) {
+					stopName = (allOtherWords + " " + ignoreStopID);
+
+					c.print(stopID + "," + stopCode + "," + stopName + "," + stopDesc + "," + stopLat + "," + 
+					           stopLon + "," + zoneID + "," + stopUrl + "," + locationType + "," + parentStation );
+				}
+				else if(stopName.contains(removed1) && stopName.contains(removed2)) {
+					stopName = (allOtherWords2 + " " + ignoreStopID + " " + ignoreStopCode);
+					
+					c.print(stopID + "," + stopCode + "," + stopName + "," + stopDesc + "," + stopLat + "," + 
+					           stopLon + "," + zoneID + "," + stopUrl + "," + locationType + "," + parentStation );
+					
+				}
+				else if(stopName.contains(removed1) && stopName.contains(removed3)) {
+					stopName = (allOtherWords2 + " " + ignoreStopID + " " + ignoreStopCode);
+					
+					c.print(stopID + "," + stopCode + "," + stopName + "," + stopDesc + "," + stopLat + "," + 
+					           stopLon + "," + zoneID + "," + stopUrl + "," + locationType + "," + parentStation );
+				}
+				else if(stopName.contains(removed1) && stopName.contains(removed4)) {
+					stopName = (allOtherWords2 + " " + ignoreStopID + " " + ignoreStopCode);
+					
+					c.print(stopID + "," + stopCode + "," + stopName + "," + stopDesc + "," + stopLat + "," + 
+					           stopLon + "," + zoneID + "," + stopUrl + "," + locationType + "," + parentStation );
+				}
+				else if(stopName.contains(removed1) && stopName.contains(removed5)) {
+					stopName = (allOtherWords2 + " " + ignoreStopID + " " + ignoreStopCode);
+					
+					c.print(stopID + "," + stopCode + "," + stopName + "," + stopDesc + "," + stopLat + "," + 
+					           stopLon + "," + zoneID + "," + stopUrl + "," + locationType + "," + parentStation );
+				}
 				
+				else {
+					c.print(stopID + "," + stopCode + "," + stopName + "," + stopDesc + "," + stopLat + "," + 
+					           stopLon + "," + zoneID + "," + stopUrl + "," + locationType + "," + parentStation );
+				}
 			}
+			scanner.close();
+			c.flush();
+			c.close();
+			originalFile.delete();
+			//need snapshot of file
+			File snapDump = new File(stopsFile);
+			removedFile.renameTo(snapDump);
+				
+		}
+		catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 		
-		
 	}
-	
 
-	
 }
+//now onto TST - Searching for a bus stop by full name or by the first few characters in the name
