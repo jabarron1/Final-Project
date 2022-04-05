@@ -198,4 +198,49 @@ public class TST<Value>{ //mmust be defined
 		}
 	}
 	
+	//now need to do the search by first few characters only
+	public static void characterSearch() {
+		TST<String> tree = new TST<String>();
+		String line ="";
+        File stopsFile = new File("stops.txt");
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(stopsFile));
+			while((line = br.readLine()) != null) {
+				String[] stops = line.split(",");
+				String stopName = stops[2];
+				String[] name = stopName.split(" ");
+				String stopName2 = name[0];
+				
+				String stopInfo = "Stop id: " + stops[0] + "," + " Stop Code: " + stops[1] + "," 
+			            + " Stop Desc: " + stops[3] + "," + " Stop Lat: " + stops[4] + "," + 
+					    " Stop Lon: " + stops[5] + "," + " Zone ID " + stops[6];
+				tree.put(stopName2, stopInfo);
+				
+			}
+			br.close();
+	} //catch
+		
+	catch(FileNotFoundException e) {
+		e.printStackTrace();
+	}
+	catch(IOException e) {
+		e.printStackTrace();
+	}
+		//now user input again
+		String userInput2 = JOptionPane.showInputDialog("Enter the start of the bus stop you would like to find");
+		String input = userInput2.toUpperCase();
+		
+		String notValid = "";
+		for(String search2 : tree.keysWithPrefix(input)) {
+			notValid += search2+tree.get(search2)+ "\n";
+			if(notValid == "") {
+				JOptionPane.showMessageDialog(null, "This is not a valid stop. Please enter a valid bus stop.");
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Here is the information on the bus stop you have searched for: " + "\n" + notValid);
+			}
+		}
+}
+	
 }
