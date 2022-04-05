@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -157,7 +159,7 @@ public class SearchForBusStopTST {
 }
 //now onto TST - Searching for a bus stop by full name or by the first few characters in the name
 
-public class TST<Value>{ //mmust be defined
+public class TST<Value>{ //must be defined
 	private tstNode<Value> root;
 	private int N;
 	
@@ -244,5 +246,110 @@ public class TST<Value>{ //mmust be defined
 }
 	
 	//go through above, see what needs to be defined ect.
+	
+	private static class tstNode<Value>{
+		private char character;
+		private tstNode<Value> left;
+		private tstNode<Value> middle;
+		private tstNode<Value> right;
+		private Value val;
+	}
+	
+	public TST(){
+		
+	}
+	
+	public int size() {
+		return N;
+	}
+	
+	public boolean contains(String key) {
+		if(key==null)
+			return false;
+		return get(key) != null; //get
+	}
+	
+	public Value get(String key) {
+		if(key == null) {
+			return null;
+		}
+		if(key.length() == 0) {
+			return null;
+		}
+		tstNode<Value> x = get(root, key, 0); //get
+		if(x==null)
+			return null;
+		return x.val;
+	}
+	
+	private tstNode<Value> get(tstNode<Value> y, String key, int d){
+		if(y==null) {
+			return null;
+		}
+		char c = key.charAt(d);
+		if(c<y.character)
+			return get(y.left, key, d);
+		else if (c>y.character)
+			return get(y.right, key, d);
+		else if(d<key.length()-1)
+			return get(y.middle, key, d+1);
+		else
+			return y;
+	}
+	//onto put
+	private tstNode<Value> put(tstNode<Value> x, String key, Value val, int d){
+		char c = key.charAt(d);
+		if (x == null) 
+		{
+			x = new tstNode<Value>();
+			x.character = c;
+		}
+		if (c < x.character)              
+			x.left  = put(x.left,  key, val, d);
+		else if (c > x.character)               
+			x.right = put(x.right, key, val, d);
+		else if (d < key.length() - 1)  
+			x.middle   = put(x.middle,   key, val, d+1);
+		else                            
+			x.val   = val;
+
+		return x;
+	}
+	public void put(String key, Value val) {
+		try {
+			if(!contains(key))
+				N++;
+			root = put(root, key, val, 0);
+		}//catch
+		catch(NullPointerException e) {
+			System.out.println("There was a null pointer exception thrown.");
+		}
+	}
+	
+	//keys with prefix , keys with prefix check above
+	public Iterable<String> keysWithPrefix(String prefix){
+		if(prefix == null) {
+			throw new IllegalArgumentException("A null argument called keysWithPrefix.");
+		}
+		Queue<String> queue = new LinkedList<String>();
+		tstNode<Value> x = get(root, prefix, 0);
+		if(x==null)
+			return queue;
+		if(x.val != null)
+			queue.add(prefix);
+		collecting(x.middle, new StringBuilder(prefix), queue);//collecting
+		return queue;
+	}
+	
+	private void collecting(tstNode<Value> x, StringBuilder prefix, Queue<String> queue) {
+		if(x==null)
+			return;
+		collecting(x.left, prefix, queue);
+		if(x.val != null)
+			queue.add(prefix.toString()+ x.character);
+		collecting(x.middle, prefix.append(x.character), queue);
+		prefix.deleteCharAt(prefix.length()-1);
+		collecting(x.right, prefix, queue);
+	}
 	
 }
