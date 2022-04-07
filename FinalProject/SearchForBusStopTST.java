@@ -163,6 +163,8 @@ public class TST<Value>{ //must be defined
 	private tstNode<Value> root;
 	private int N;
 	
+	
+	
 	public static void tstStops() {
 		TST<String> search = new TST<String>();
 		String line = "";
