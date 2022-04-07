@@ -100,7 +100,7 @@ public class SearchForAllTrips {
 
 //now need to be able to take user inputted arrival time sorted by trip id, removing invalid times.
 
-public class SortingArrivalTimes{ //***
+class SortingArrivalTimes{ //TOOK PUBLIC OUT FROM INFRONT
 	//need to remove invalid times such as 24:00:00 and 00:00:00
 	static String timeInvalid = "24:00:00";
 	static String timeInvalid2 = "00:00:00";

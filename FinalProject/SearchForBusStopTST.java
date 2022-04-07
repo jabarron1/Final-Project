@@ -159,7 +159,7 @@ public class SearchForBusStopTST {
 }
 //now onto TST - Searching for a bus stop by full name or by the first few characters in the name
 
-public class TST<Value>{ //must be defined
+class TST<Value>{ //took public out from infront
 	private tstNode<Value> root;
 	private int N;
 	
