@@ -118,7 +118,7 @@ class SortingArrivalTimes{ //TOOK PUBLIC OUT FROM INFRONT
 		
 		try {
 			//make sure time is valid, show message if not valid.
-			BufferedReader br = new BufferedReader(new FileReader(stop_times.txt)); //read in file
+			BufferedReader br = new BufferedReader(new FileReader("stop_times.txt")); //had forgotten "".
 			while((line = br.readLine()) != null) {
 				String[] stop = line.split(" ");
 				String arrivalTime = stop[1];
