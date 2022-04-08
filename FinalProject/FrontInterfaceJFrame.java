@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -94,7 +95,42 @@ public class FrontInterfaceJFrame extends JFrame {
 		exitButton.setBounds(100, 100, 100, 50);//need to figure out positioning
 		contentPane.add(exitButton);
 		
+		//onto trips w arrival time 
+		JButton TSTButton = new JButton("Search for Bus Stop by full name or by the first few characters in the name");
+		TSTButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int choice = Integer.parseInt(JOptionPane.showInputDialog(null, "Do you want to search by first few characters of the stop name or full stop name? \n Enter 0 for first few characters "
+						+ "or 1 for full stop name"));
+
+				if(choice == 0)
+				{
+					TST.characterSearch();
+				}
+				else if (choice == 1)
+					TST.tstStops();
+
+				else {
+					JOptionPane.showMessageDialog(null, "Invalid option");
+
+				}
+			}
+		});
+		TSTButton.setBounds(200, 50, 300, 40); //fix bounds
+		contentPane.add(TSTButton);
 		
+		
+		
+		JButton arrivalTimesButton = new JButton("Searching for all trips with a given arrival time");
+		arrivalTimesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				SortingArrivalTimes.arrivalTimesSorted();
+			}
+		});
+		arrivalTimesButton.setBounds(24, 176, 312, 64);
+		contentPane.add(arrivalTimesButton);
+		
+		//that should be all necessary buttons, next need to put them in correct positions.
 	}
 
 }
