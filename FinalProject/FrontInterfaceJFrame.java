@@ -9,7 +9,9 @@
 //GUIs offer better multitasking and control, more user friendly. JFrame is best option through windowbuilder.
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -68,10 +70,24 @@ public class FrontInterfaceJFrame extends JFrame {
 			}
 
 		});
-		shortPathButton.setBounds(10, 10, 10, 10);
+		shortPathButton.setBounds(200, 200, 200, 200); //need to figure out positioning
 		contentPane.add(shortPathButton);
 		
 		//create exit button
+		
+		JButton exitButton = new JButton("Click to Exit");
+		exitButton.setForeground(new Color(200, 0, 0));
+		exitButton.setFont(new Font("Red Exit", Font.PLAIN, 10));
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+		
+				
+				System.exit(0);
+			}
+		});
+		exitButton.setBounds(100, 100, 100, 50);//need to figure out positioning
+		contentPane.add(exitButton);
 	}
 
 }
