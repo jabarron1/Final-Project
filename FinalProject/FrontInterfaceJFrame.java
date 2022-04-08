@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -52,6 +53,10 @@ public class FrontInterfaceJFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
+		//JLabel used to display a short string 
+		JLabel messageToUser = new JLabel("Please choose your desired option:");
+		messageToUser .setBounds(40, 40, 400, 40);
+		contentPane.add(messageToUser );
 		
 		//now add buttons
 		JButton shortPathButton = new JButton("Button for shortest path between two bus stops");//change name later
@@ -70,6 +75,8 @@ public class FrontInterfaceJFrame extends JFrame {
 			}
 
 		});
+		//positioning explained:
+		//(A,B,C,D) A:HOW FAR LEFT/RIGHT, B:UP/DOWN, C:LENGTH OF TEXTBOX, D: Width of textbox
 		shortPathButton.setBounds(200, 200, 200, 200); //need to figure out positioning
 		contentPane.add(shortPathButton);
 		
@@ -81,13 +88,13 @@ public class FrontInterfaceJFrame extends JFrame {
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-		
-				
 				System.exit(0);
 			}
 		});
 		exitButton.setBounds(100, 100, 100, 50);//need to figure out positioning
 		contentPane.add(exitButton);
+		
+		
 	}
 
 }
