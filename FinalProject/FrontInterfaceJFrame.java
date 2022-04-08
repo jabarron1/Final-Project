@@ -10,7 +10,11 @@
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -48,6 +52,26 @@ public class FrontInterfaceJFrame extends JFrame {
 		
 		
 		//now add buttons
+		JButton shortPathButton = new JButton("Button for shortest path between two bus stops");//change name later
+		shortPathButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+					
+				try {
+					ShortestPath.showShortestPath();
+				} 
+				catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
+					
+					
+			}
+
+		});
+		shortPathButton.setBounds(10, 10, 10, 10);
+		contentPane.add(shortPathButton);
+		
+		//create exit button
 	}
 
 }
