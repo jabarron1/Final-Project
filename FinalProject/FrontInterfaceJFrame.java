@@ -6,14 +6,18 @@
 //numbers), no route possible etc.
 
 //need to choose between command line or graphical UI.
-//GUIs offer better multitasking and control, more user friendly.
+//GUIs offer better multitasking and control, more user friendly. JFrame is best option through windowbuilder.
+
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-public class FrontInterfaceFinalProject {
+public class FrontInterfaceJFrame extends JFrame {
 
-	private JFrame frame;
+	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -22,8 +26,8 @@ public class FrontInterfaceFinalProject {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrontInterfaceFinalProject window = new FrontInterfaceFinalProject();
-					window.frame.setVisible(true);
+					FrontInterfaceJFrame frame = new FrontInterfaceJFrame();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -32,19 +36,18 @@ public class FrontInterfaceFinalProject {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
-	public FrontInterfaceFinalProject() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public FrontInterfaceJFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		
+		//now add buttons
 	}
 
 }
