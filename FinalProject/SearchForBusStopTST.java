@@ -279,44 +279,44 @@ class TST<Value>{ //took public out from infront
 		if(key.length() == 0) {
 			return null;
 		}
-		tstNode<Value> x = get(root, key, 0); //get
-		if(x==null)
+		tstNode<Value> a = get(root, key, 0); //get
+		if(a==null)
 			return null;
-		return x.val;
+		return a.val;
 	}
 	
-	private tstNode<Value> get(tstNode<Value> y, String key, int d){
-		if(y==null) {
+	private tstNode<Value> get(tstNode<Value> b, String key, int d){
+		if(b==null) {
 			return null;
 		}
-		char c = key.charAt(d);
-		if(c<y.character)
-			return get(y.left, key, d);
-		else if (c>y.character)
-			return get(y.right, key, d);
+		char e = key.charAt(d);
+		if(e<b.character)
+			return get(b.left, key, d);
+		else if (e>b.character)
+			return get(b.right, key, d);
 		else if(d<key.length()-1)
-			return get(y.middle, key, d+1);
+			return get(b.middle, key, d+1);
 		else
-			return y;
+			return b;
 	}
 	//onto put
-	private tstNode<Value> put(tstNode<Value> x, String key, Value val, int d){
-		char c = key.charAt(d);
-		if (x == null) 
+	private tstNode<Value> put(tstNode<Value> a, String key, Value val, int d){
+		char e = key.charAt(d);
+		if (a == null) 
 		{
-			x = new tstNode<Value>();
-			x.character = c;
+			a = new tstNode<Value>();
+			a.character = e;
 		}
-		if (c < x.character)              
-			x.left  = put(x.left,  key, val, d);
-		else if (c > x.character)               
-			x.right = put(x.right, key, val, d);
+		if (e < a.character)              
+			a.left  = put(a.left,  key, val, d);
+		else if (e > a.character)               
+			a.right = put(a.right, key, val, d);
 		else if (d < key.length() - 1)  
-			x.middle   = put(x.middle,   key, val, d+1);
+			a.middle   = put(a.middle,   key, val, d+1);
 		else                            
-			x.val   = val;
+			a.val   = val;
 
-		return x;
+		return a;
 	}
 	public void put(String key, Value val) {
 		try {
@@ -325,34 +325,34 @@ class TST<Value>{ //took public out from infront
 			root = put(root, key, val, 0);
 		}//catch
 		catch(NullPointerException e) {
-			System.out.println("There was a null pointer exception thrown.");
+			System.out.println("This threw an exception.");
 		}
 	}
 	
 	//keys with prefix , keys with prefix check above
 	public Iterable<String> keysWithPrefix(String prefix){
 		if(prefix == null) {
-			throw new IllegalArgumentException("A null argument called keysWithPrefix.");
+			throw new IllegalArgumentException("Null argument keysWithPrefix.");
 		}
 		Queue<String> queue = new LinkedList<String>();
-		tstNode<Value> x = get(root, prefix, 0);
-		if(x==null)
+		tstNode<Value> a = get(root, prefix, 0);
+		if(a==null)
 			return queue;
-		if(x.val != null)
+		if(a.val != null)
 			queue.add(prefix);
-		collecting(x.middle, new StringBuilder(prefix), queue);//collecting
+		collecting(a.middle, new StringBuilder(prefix), queue);//collecting
 		return queue;
 	}
 	
-	private void collecting(tstNode<Value> x, StringBuilder prefix, Queue<String> queue) {
-		if(x==null)
+	private void collecting(tstNode<Value> a, StringBuilder prefix, Queue<String> queue) {
+		if(a==null)
 			return;
-		collecting(x.left, prefix, queue);
-		if(x.val != null)
-			queue.add(prefix.toString()+ x.character);
-		collecting(x.middle, prefix.append(x.character), queue);
+		collecting(a.left, prefix, queue);
+		if(a.val != null)
+			queue.add(prefix.toString()+ a.character);
+		collecting(a.middle, prefix.append(a.character), queue);
 		prefix.deleteCharAt(prefix.length()-1);
-		collecting(x.right, prefix, queue);
+		collecting(a.right, prefix, queue);
 	}
 	
 }

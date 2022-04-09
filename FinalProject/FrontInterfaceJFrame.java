@@ -68,7 +68,7 @@ public class FrontInterfaceJFrame extends JFrame {
 		contentPane.add(messageToUser2 );
 		
 		//now add buttons
-		JButton shortPathButton = new JButton("Button for shortest path between two bus stops (go to console)takes 58 seconds:(");//change name later
+		JButton shortPathButton = new JButton("Button for shortest path between two bus stops, this may take upto a minute.");//change name later
 		shortPathButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //takes so long to get to console
 					

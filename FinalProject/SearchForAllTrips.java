@@ -31,8 +31,8 @@ public class SearchForAllTrips {
 		//max time allowed is 23:59:59
 		String timeInvalid = "24:00:00";
 		String validTime = "10:00:00";
-		String stopsFile = "stops.txt";
-		File originalFile = new File("stops.txt"); //changed from stopsFile
+		String stopsFile = "stop_times.txt"; ///changing
+		File originalFile = new File(stopsFile); //changed from stopsFile
 		File removedFile = new File(tempStopsFile);
 		
 		//trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_traveled
@@ -51,7 +51,7 @@ public class SearchForAllTrips {
 			FileWriter a = new FileWriter(tempStopsFile, true);
 			BufferedWriter b = new BufferedWriter(a);
 			PrintWriter c = new PrintWriter(b);
-			Scanner scanner = new Scanner(new File(stopsFile));
+			Scanner scanner = new Scanner(new File("stop_times.txt"));
 			scanner.useDelimiter("[,\n]");
 			scanner.nextLine();
 			
@@ -124,7 +124,7 @@ class SortingArrivalTimes{ //TOOK PUBLIC OUT FROM INFRONT
 			BufferedReader br = new BufferedReader(new FileReader("stop_times.txt")); //had forgotten "".
 			while((line = br.readLine()) != null) {
 				String[] stop = line.split(" ");//added comma
-				String arrivalTime = stop[1];//*****
+				String arrivalTime = stop[1];//*****1 was in
 				if(userInput.compareTo(timeInvalid) < 0 && userInput.compareTo(timeInvalid2) > 0) {
 					valid = true;
 					

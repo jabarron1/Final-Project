@@ -59,7 +59,7 @@ public class ShortestPath {
 		int finishPlace = userInput.nextInt();
 		
 		//can then print shortest distance between the two user inputted locations, first need to create this.
-		System.out.println("The shortest distance from " + startPlace + " to " + finishPlace + " is " + map.shortestPath(startPlace, finishPlace));
+		System.out.println("The shortest distance from " + startPlace + " to " + finishPlace +  map.shortestPath(startPlace, finishPlace));
 		
 		userInput.close();
 			
@@ -185,7 +185,7 @@ public class ShortestPath {
 			}
 		}
 		if(finalDestination == startDestination) {
-			return "" + adjMatrix[startDestination][finalDestination]; //THIS WORKS
+			return ". The start destination is the same as the final destination therefore the distance is " + adjMatrix[startDestination][finalDestination]; //THIS WORKS
 		}
 		
 		while(noStopping < distancesLength) {
@@ -206,15 +206,15 @@ public class ShortestPath {
 		}
 		
 		if(distanceTo[finalDestination] == Double.POSITIVE_INFINITY) {
-			return "there is no route between these stops.";
+			return ". Unfortunately is no route between these stops.";
 		}
 		
 		while(secondNode != firstNode) {
 			route = edgeTo[(int) secondNode] + route;
 			secondNode = edgeTo[(int) secondNode];
 		}
-		route = route + " , " +finalDestination;
-		return distanceTo[finalDestination] + " between stops " + route;
+		route = route + ", " +finalDestination;
+		return " is " + distanceTo[finalDestination] + " between stops " + route;
 				
 	}
 	
