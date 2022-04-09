@@ -32,7 +32,7 @@ public class SearchForAllTrips {
 		String timeInvalid = "24:00:00";
 		String validTime = "10:00:00";
 		String stopsFile = "stops.txt";
-		File originalFile = new File(stopsFile);
+		File originalFile = new File("stops.txt"); //changed from stopsFile
 		File removedFile = new File(tempStopsFile);
 		
 		//trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_traveled
@@ -69,7 +69,8 @@ public class SearchForAllTrips {
 				
 				//if statement
 				//arrival time is less than timeInvalid
-				if(arrivalTime.compareTo(validTime) < 0) {
+				if(arrivalTime.compareTo(timeInvalid) < 0) {
+					if(arrivalTime.compareTo(validTime)<0) {
 					c.println(tripID + "" + arrivalTime + "" + departureTime + "" + stopID + "" + stopSequence + "" +
 				            stopHeadSign + "" + pickupType + "" + dropoffType + "" + shapeDistTravelled);
 				}
@@ -77,6 +78,7 @@ public class SearchForAllTrips {
 					c.println(tripID + "" + arrivalTime + "" + departureTime + "" + stopID + "" + stopSequence + "" +
 				            stopHeadSign + "" + pickupType + "" + dropoffType + "" + shapeDistTravelled);
 				}
+			}
 			}
 			scanner.close();
 			c.flush();
@@ -118,10 +120,11 @@ class SortingArrivalTimes{ //TOOK PUBLIC OUT FROM INFRONT
 		
 		try {
 			//make sure time is valid, show message if not valid.
+			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader(new FileReader("stop_times.txt")); //had forgotten "".
 			while((line = br.readLine()) != null) {
-				String[] stop = line.split(" ");
-				String arrivalTime = stop[1];
+				String[] stop = line.split(" ");//added comma
+				String arrivalTime = stop[1];//*****
 				if(userInput.compareTo(timeInvalid) < 0 && userInput.compareTo(timeInvalid2) > 0) {
 					valid = true;
 					
@@ -137,9 +140,9 @@ class SortingArrivalTimes{ //TOOK PUBLIC OUT FROM INFRONT
 						break;
 					}
 				}
+			
+			//extra }
 			}
-			
-			
 		}//exception catch
 		catch(FileNotFoundException e)
 		{

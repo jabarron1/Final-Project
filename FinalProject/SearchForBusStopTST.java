@@ -41,7 +41,7 @@ public class SearchForBusStopTST {
 	public static void remove() {
 		String tempStopsFile = "tempStopsFile.Txt";
 		String stopsFile = "stops.txt";
-		File originalFile = new File(stopsFile);
+		File originalFile = new File("stops.txt");//stopsFile
 		File removedFile = new File(tempStopsFile);
 		//stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type,parent_station 
 		//store to create new sentence without any keywords.
@@ -61,7 +61,7 @@ public class SearchForBusStopTST {
 			FileWriter a = new FileWriter(tempStopsFile, true);
 			BufferedWriter b = new BufferedWriter(a);
 			PrintWriter c = new PrintWriter(b);
-			Scanner scanner = new Scanner(new File(stopsFile));
+			Scanner scanner = new Scanner(new File("stops.txt"));//stopsFile
 			scanner.useDelimiter("[,\n]");
 			scanner.nextLine();
 			
@@ -173,8 +173,9 @@ class TST<Value>{ //took public out from infront
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(stopsFile));
 			while((line = br.readLine()) != null) {
-				String[] stops = line.split(",");
-				String stopName = stops[2];
+				String[] stops = line.split(","); //error around here
+				String stopName = stops[2]; //get name
+				//
 				String stopInfo = "Stop id: " + stops[0] + "," + " Stop Code: " + stops[1] + "," 
 				            + " Stop Desc: " + stops[3] + "," + " Stop Lat: " + stops[4] + "," + 
 						    " Stop Lon: " + stops[5] + "," + " Zone ID " + stops[6];
@@ -204,22 +205,22 @@ class TST<Value>{ //took public out from infront
 	
 	//now need to do the search by first few characters only
 	public static void characterSearch() {
-		TST<String> tree = new TST<String>();
+		TST<String> search2 = new TST<String>(); //search2
 		String line ="";
         File stopsFile = new File("stops.txt");
 		
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(stopsFile));
+			BufferedReader br = new BufferedReader(new FileReader(stopsFile));//stops file
 			while((line = br.readLine()) != null) {
 				String[] stops = line.split(",");
-				String stopName = stops[2];
+				String stopName = stops[2];//changed from 2 //error around here
 				String[] name = stopName.split(" ");
 				String stopName2 = name[0];
 				
 				String stopInfo = "Stop id: " + stops[0] + "," + " Stop Code: " + stops[1] + "," 
 			            + " Stop Desc: " + stops[3] + "," + " Stop Lat: " + stops[4] + "," + 
 					    " Stop Lon: " + stops[5] + "," + " Zone ID " + stops[6];
-				tree.put(stopName2, stopInfo);
+				search2.put(stopName2, stopInfo); //search2
 				
 			}
 			br.close();
@@ -236,8 +237,8 @@ class TST<Value>{ //took public out from infront
 		String input = userInput2.toUpperCase();
 		
 		String notValid = "";
-		for(String search2 : tree.keysWithPrefix(input)) {
-			notValid += search2+tree.get(search2)+ "\n";
+		for(String search3 : search2.keysWithPrefix(input)) { //********search2
+			notValid += search2+search2.get(search3)+ "\n"; ///search2******
 			if(notValid == "") {
 				JOptionPane.showMessageDialog(null, "This is not a valid stop. Please enter a valid bus stop.");
 			}

@@ -26,7 +26,9 @@ public class ShortestPath {
 	private String stop_timesTxt; 
 	private String transfersTxt;
 	//adjacency matrix for graph
-	private double adjMatrix[][] = new double [10000][10000]; //dimension expressions needed, will start with 10,000
+	//
+	//Index 12000 out of bounds for length 12000
+	private double adjMatrix[][] = new double [12479][12479]; //dimension expressions needed, will start with 10,000 ,,, 12479
 	
 	//want to print the shortest path graph, need a public main, then publicly define the method , then private create graph
 	//want the main to just return the shortest path
@@ -36,7 +38,7 @@ public class ShortestPath {
 	}
 	
 	public static void showShortestPath() throws FileNotFoundException{
-		ShortestPath map = new ShortestPath("stop_timesTxt", "transfersTxt"); //define this
+		ShortestPath map = new ShortestPath("stop_times.txt", "transfers.txt"); //*******
 		
 		try
 		
@@ -50,10 +52,10 @@ public class ShortestPath {
 		
 		//take user input
 		Scanner userInput = new Scanner (System.in);
-		System.out.print("Please enter starting bus stop location.");
+		System.out.print("Please enter starting bus stop location (STOP ID): ");
 		int startPlace = userInput.nextInt();
 		
-		System.out.print("Please enter your final destinations bus stop.");
+		System.out.print("Please enter your final destinations bus stop (STOP ID): ");
 		int finishPlace = userInput.nextInt();
 		
 		//can then print shortest distance between the two user inputted locations, first need to create this.
@@ -66,10 +68,10 @@ public class ShortestPath {
 	
 	//private createGraph which is the matrix
 	private void createGraph() throws FileNotFoundException{
-		for(int i = 0; i < 10000; i++) {
-			for(int j = 0; j < 10000; j++) {
+		for(int i = 0; i < 12479; i++) {
+			for(int j = 0; j < 12479; j++) {
 				if(i != j) { //two different locations
-					adjMatrix[i][j] = Math.pow(10000,10000); //need to recheck this
+					adjMatrix[i][j] = Math.pow(1.7*10,308); //need to recheck this, //WORKS
 				}
 				else { //0 as bus doesnt have to go anywhere
 					adjMatrix[i][j] = 0;
@@ -88,17 +90,20 @@ public class ShortestPath {
 		String currentLineStopTimes;
 		
 		//stop times file
-		File stopTimes = new File(stop_timesTxt); //1
+		File stopTimes = new File("stop_times.txt"); //***********stop_timesTxt
 		Scanner stopTimesAndTransferFile = new Scanner(stopTimes); //2
 		Scanner lineStopTimes = null; //3
 		stopTimesAndTransferFile.nextLine(); //2
 		
 		while(stopTimesAndTransferFile.hasNextLine()) { //2
+			
 			currentLineStopTimes = stopTimesAndTransferFile.nextLine(); //str
 			lineStopTimes = new Scanner(currentLineStopTimes); //3
 			lineStopTimes.useDelimiter(","); //3
 			
 			lastTripID = currentTripID;
+			currentTripID = lineStopTimes.nextInt(); //added this
+			
 			for(int i = 1; i < 3; i++) {
 				lineStopTimes.next(); //3
 			}
@@ -116,7 +121,7 @@ public class ShortestPath {
 		
 		//now onto transfers file, therefore indirect service (ie transfer needed) with a cost of 2
 		
-		File transfers = new File(transfersTxt);
+		File transfers = new File("transfers.txt");//********transfersTxt
 		stopTimesAndTransferFile = new Scanner(transfers);
 		stopTimesAndTransferFile.nextLine();
 		
@@ -145,21 +150,29 @@ public class ShortestPath {
 	//define ShortestPath
 	public ShortestPath(String stop_timesTxt, String transfersTxt) throws FileNotFoundException{
 		this.stop_timesTxt = stop_timesTxt;
-		this.transfersTxt = transfersTxt;
+		this.transfersTxt = transfersTxt; //changed these
 		createGraph();
 	}
+	
+	//relaxingEdge
+		private void relaxingEdge(int startDestination, int finalDestination, double[] distanceTo, int[] edgeTo) {
+			if(distanceTo[finalDestination] > distanceTo[startDestination] + adjMatrix[startDestination][finalDestination]) {
+				distanceTo[finalDestination] = distanceTo[startDestination] + adjMatrix[startDestination][finalDestination];
+				edgeTo[finalDestination] = startDestination;
+			}
+		}
 	
 	//need to find the shortest path, shortestPath. use startDestination and finalDestination
 	public String shortestPath(int startDestination, int finalDestination) {
 		//nodes, distanceTo, edgeTo, current, noStopping, location, shortDistance, distancesLength
-		int edgeTo[]= new int[10000];
-		int current[] = new int[10000];
-		double distanceTo[] = new double[10000];
+		int edgeTo[]= new int[12479];
+		int current[] = new int[12479];
+		double distanceTo[] = new double[12479];
 		current[startDestination]=1;
 		distanceTo[startDestination] = 0;
 		int currentLocation = startDestination;
 		int noStopping = 0;
-		double shortDistance = Math.pow(10000, 10000);
+		double shortDistance = Math.pow(7*10,308);
 		
 		double firstNode = startDestination;
 		double secondNode = finalDestination;
@@ -172,7 +185,7 @@ public class ShortestPath {
 			}
 		}
 		if(finalDestination == startDestination) {
-			return "" + adjMatrix[startDestination][finalDestination]; //check this out
+			return "" + adjMatrix[startDestination][finalDestination]; //THIS WORKS
 		}
 		
 		while(noStopping < distancesLength) {
@@ -193,25 +206,19 @@ public class ShortestPath {
 		}
 		
 		if(distanceTo[finalDestination] == Double.POSITIVE_INFINITY) {
-			return "There is no route between these stops.";
+			return "there is no route between these stops.";
 		}
 		
 		while(secondNode != firstNode) {
 			route = edgeTo[(int) secondNode] + route;
 			secondNode = edgeTo[(int) secondNode];
 		}
-		route = route + "," +finalDestination;
+		route = route + " , " +finalDestination;
 		return distanceTo[finalDestination] + " between stops " + route;
 				
 	}
 	
-	//relaxingEdge
-	private void relaxingEdge(int startDestination, int finalDestination, double[] distanceTo, int[] edgeTo) {
-		if(distanceTo[finalDestination] > distanceTo[startDestination] + adjMatrix[startDestination][finalDestination]) {
-			distanceTo[finalDestination] = distanceTo[startDestination] + adjMatrix[startDestination][finalDestination];
-			edgeTo[finalDestination] = startDestination;
-		}
-	}
+	
 
 
 	

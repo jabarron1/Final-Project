@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class FrontInterfaceJFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -48,22 +50,27 @@ public class FrontInterfaceJFrame extends JFrame {
 	 */
 	public FrontInterfaceJFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(50, 100, 950, 700);//100, 100, 450, 300
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+        contentPane.setBackground(Color.YELLOW);
 		
+		//(A,B,C,D) A:HOW FAR LEFT/RIGHT, B:UP/DOWN, C:LENGTH OF TEXTBOX, D: Width of textbox
 		//JLabel used to display a short string 
 		JLabel messageToUser = new JLabel("Please choose your desired option:");
-		messageToUser .setBounds(40, 40, 400, 40);
+		messageToUser .setBounds(580, 100, 450, 200); //top centre
 		contentPane.add(messageToUser );
 		
+		JLabel messageToUser2 = new JLabel("Please set this to fullscreen :)");
+		messageToUser2 .setBounds(50, 200, 450, 200); //top centre
+		contentPane.add(messageToUser2 );
+		
 		//now add buttons
-		JButton shortPathButton = new JButton("Button for shortest path between two bus stops");//change name later
+		JButton shortPathButton = new JButton("Button for shortest path between two bus stops (go to console)takes 58 seconds:(");//change name later
 		shortPathButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
+			public void actionPerformed(ActionEvent e) { //takes so long to get to console
 					
 				try {
 					ShortestPath.showShortestPath();
@@ -78,7 +85,7 @@ public class FrontInterfaceJFrame extends JFrame {
 		});
 		//positioning explained:
 		//(A,B,C,D) A:HOW FAR LEFT/RIGHT, B:UP/DOWN, C:LENGTH OF TEXTBOX, D: Width of textbox
-		shortPathButton.setBounds(200, 200, 200, 200); //need to figure out positioning
+		shortPathButton.setBounds(390, 250, 600, 80); //need to figure out positioning
 		contentPane.add(shortPathButton);
 		
 		//create exit button
@@ -92,7 +99,7 @@ public class FrontInterfaceJFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-		exitButton.setBounds(100, 100, 100, 50);//need to figure out positioning
+		exitButton.setBounds(645, 560, 100, 40);//need to figure out positioning
 		contentPane.add(exitButton);
 		
 		//onto trips w arrival time 
@@ -110,12 +117,12 @@ public class FrontInterfaceJFrame extends JFrame {
 					TST.tstStops();
 
 				else {
-					JOptionPane.showMessageDialog(null, "Invalid option");
+					JOptionPane.showMessageDialog(null, "Not a valid option");
 
 				}
 			}
 		});
-		TSTButton.setBounds(200, 50, 300, 40); //fix bounds
+		TSTButton.setBounds(393, 365, 600, 50); //positioned
 		contentPane.add(TSTButton);
 		
 		
@@ -127,10 +134,17 @@ public class FrontInterfaceJFrame extends JFrame {
 				SortingArrivalTimes.arrivalTimesSorted();
 			}
 		});
-		arrivalTimesButton.setBounds(24, 176, 312, 64);
+		//(A,B,C,D) A:HOW FAR LEFT/RIGHT, B:UP/DOWN, C:LENGTH OF TEXTBOX, D: Width of textbox
+		arrivalTimesButton.setBounds(393, 465, 600, 50);
 		contentPane.add(arrivalTimesButton);
 		
 		//that should be all necessary buttons, next need to put them in correct positions.
+		
+		//adding another button that does nothing as arrivalTimesButton is taking up the whole jframe
+		JButton arrivalTimesButton2 = new JButton("");
+		arrivalTimesButton2.setBounds(10, 10, 10, 10);
+		contentPane.add(arrivalTimesButton2);
 	}
+	
 
 }
