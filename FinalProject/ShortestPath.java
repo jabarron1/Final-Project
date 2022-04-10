@@ -21,7 +21,6 @@ import java.util.Scanner;
 //parsing through the data files and reading it into a graph.
 
 
-
 public class ShortestPath {
 	//input file names
 	private String stop_timesTxt; 

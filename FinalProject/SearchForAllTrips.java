@@ -138,6 +138,7 @@ class SortingArrivalTimes{ //TOOK PUBLIC OUT FROM INFRONT
 						break;
 					}
 				}
+				
 			
 			//extra }
 			}

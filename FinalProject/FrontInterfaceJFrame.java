@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
 @SuppressWarnings("serial")
 public class FrontInterfaceJFrame extends JFrame {
 
