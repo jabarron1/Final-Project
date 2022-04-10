@@ -59,13 +59,17 @@ public class FrontInterfaceJFrame extends JFrame {
 		
 		//(A,B,C,D) A:HOW FAR LEFT/RIGHT, B:UP/DOWN, C:LENGTH OF TEXTBOX, D: Width of textbox
 		//JLabel used to display a short string 
-		JLabel messageToUser = new JLabel("Please choose your desired option:");
+		JLabel messageToUser = new JLabel("Please choose your desired option:" );
 		messageToUser .setBounds(580, 100, 450, 200); //top centre
 		contentPane.add(messageToUser );
 		
 		JLabel messageToUser2 = new JLabel("Please set this to fullscreen :)");
 		messageToUser2 .setBounds(50, 200, 450, 200); //top centre
 		contentPane.add(messageToUser2 );
+		
+		JLabel messageToUser3 = new JLabel("Then please go to the console." );
+		messageToUser3 .setBounds(585, 130, 450, 200); 
+		contentPane.add(messageToUser3 );
 		
 		//now add buttons
 		JButton shortPathButton = new JButton("Button for shortest path between two bus stops, this may take upto a minute.");//change name later
@@ -111,10 +115,10 @@ public class FrontInterfaceJFrame extends JFrame {
 
 				if(choice == 0)
 				{
-					TST.characterSearch();
+					SearchForBusStopTST.characterSearch();
 				}
 				else if (choice == 1)
-					TST.tstStops();
+					SearchForBusStopTST.tstStops();
 
 				else {
 					JOptionPane.showMessageDialog(null, "Not a valid option");
@@ -131,7 +135,7 @@ public class FrontInterfaceJFrame extends JFrame {
 		arrivalTimesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				SortingArrivalTimes.arrivalTimesSorted(); //SortingArrivalTimes.arrivalTimesSorted();
+				SearchForAllTrips.arrivalTimesSorted(); //SortingArrivalTimes.arrivalTimesSorted();
 			}
 		});
 		//(A,B,C,D) A:HOW FAR LEFT/RIGHT, B:UP/DOWN, C:LENGTH OF TEXTBOX, D: Width of textbox
