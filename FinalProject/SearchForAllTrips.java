@@ -96,7 +96,10 @@ public class SearchForAllTrips {
 			e.printStackTrace();
 		}
 		
+		
+		
 	}
+	
 	
 } 
 

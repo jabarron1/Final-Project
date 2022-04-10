@@ -131,7 +131,7 @@ public class FrontInterfaceJFrame extends JFrame {
 		arrivalTimesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				SortingArrivalTimes.arrivalTimesSorted();
+				SortingArrivalTimes.arrivalTimesSorted(); //SortingArrivalTimes.arrivalTimesSorted();
 			}
 		});
 		//(A,B,C,D) A:HOW FAR LEFT/RIGHT, B:UP/DOWN, C:LENGTH OF TEXTBOX, D: Width of textbox
