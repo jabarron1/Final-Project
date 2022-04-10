@@ -20,7 +20,6 @@ import java.util.Scanner;
 //adjacency matrix representation of a graph, undirected/directed. This will create a graph by 
 //parsing through the data files and reading it into a graph.
 
-
 public class ShortestPath {
 	//input file names
 	private String stop_timesTxt; 
