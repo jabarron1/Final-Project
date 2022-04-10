@@ -115,10 +115,10 @@ public class FrontInterfaceJFrame extends JFrame {
 
 				if(choice == 0)
 				{
-					SearchForBusStopTST.characterSearch();
+					TST.characterSearch();
 				}
 				else if (choice == 1)
-					SearchForBusStopTST.tstStops();
+					TST.tstStops();
 
 				else {
 					JOptionPane.showMessageDialog(null, "Not a valid option");
@@ -135,7 +135,7 @@ public class FrontInterfaceJFrame extends JFrame {
 		arrivalTimesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				SearchForAllTrips.arrivalTimesSorted(); //SortingArrivalTimes.arrivalTimesSorted();
+				SortingArrivalTimes.arrivalTimesSorted(); //SortingArrivalTimes.arrivalTimesSorted();
 			}
 		});
 		//(A,B,C,D) A:HOW FAR LEFT/RIGHT, B:UP/DOWN, C:LENGTH OF TEXTBOX, D: Width of textbox

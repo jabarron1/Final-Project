@@ -32,10 +32,6 @@ public class ShortestPath {
 	
 	//want to print the shortest path graph, need a public main, then publicly define the method , then private create graph
 	//want the main to just return the shortest path
-	public static void main(String[] args) throws FileNotFoundException{
-		
-		showShortestPath(); //define this method
-	}
 	
 	public static void showShortestPath() throws FileNotFoundException{
 		ShortestPath map = new ShortestPath("stop_times.txt", "transfers.txt"); //*******
