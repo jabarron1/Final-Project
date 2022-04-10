@@ -21,6 +21,7 @@ import java.util.Scanner;
 //parsing through the data files and reading it into a graph.
 
 
+
 public class ShortestPath {
 	//input file names
 	private String stop_timesTxt; 
@@ -32,6 +33,13 @@ public class ShortestPath {
 	
 	//want to print the shortest path graph, need a public main, then publicly define the method , then private create graph
 	//want the main to just return the shortest path
+	
+	//define ShortestPath
+		public ShortestPath(String stop_timesTxt, String transfersTxt) throws FileNotFoundException{
+			this.stop_timesTxt = stop_timesTxt;
+			this.transfersTxt = transfersTxt; //changed these
+			createGraph();
+		}
 	
 	public static void showShortestPath() throws FileNotFoundException{
 		ShortestPath map = new ShortestPath("stop_times.txt", "transfers.txt"); //*******
@@ -143,12 +151,7 @@ public class ShortestPath {
 		
 	}
 	
-	//define ShortestPath
-	public ShortestPath(String stop_timesTxt, String transfersTxt) throws FileNotFoundException{
-		this.stop_timesTxt = stop_timesTxt;
-		this.transfersTxt = transfersTxt; //changed these
-		createGraph();
-	}
+	
 	
 	//relaxingEdge
 		private void relaxingEdge(int startDestination, int finalDestination, double[] distanceTo, int[] edgeTo) {

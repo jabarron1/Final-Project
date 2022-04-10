@@ -44,6 +44,7 @@ public class FrontInterfaceJFrame extends JFrame {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
